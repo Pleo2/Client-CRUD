@@ -1,6 +1,6 @@
 # client
 
-A new Flutter project.
+Client is a flutter app for ios and android devices.
 
 ## Getting Started
 
