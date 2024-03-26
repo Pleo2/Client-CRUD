@@ -1,1 +1,32 @@
-import 'dart:io';import 'package:flutter/cupertino.dart';import 'package:flutter/material.dart';void main() => runApp(const MyApp());class MyApp extends StatelessWidget {  const MyApp({super.key});  @override  Widget build(BuildContext context) =>      Platform.isIOS ? cupertinoRoot() : materialRoot();  Widget materialRoot() => const MaterialApp(        debugShowCheckedModeBanner: false,        title: 'Scaffold app',        home: MyHomePageMaterial(          label: 'Scaffold Home',        ),      );  Widget cupertinoRoot() => const CupertinoApp(        debugShowCheckedModeBanner: false,        theme: CupertinoThemeData(brightness: Brightness.dark),        home: MyHomePageCupertino(          label: 'Scaffold Home',        ),      );}// Material App Home Pageclass MyHomePageMaterial extends StatefulWidget {  final String label;  const MyHomePageMaterial({super.key, required this.label});  @override  MyHomePageMaterialState createState() => MyHomePageMaterialState();}class MyHomePageMaterialState extends State<MyHomePageMaterial> {  Icon _heart = const Icon(Icons.favorite_border, color: Colors.red);  bool _liked = false;  String _selectRoute = 'Home';  int _selectElement = 0;  @override  Widget build(BuildContext context) => material();  Widget material() => Scaffold(        appBar: AppBar(          backgroundColor: Colors.white,          title: Text(widget.label,              style: const TextStyle(                fontWeight: FontWeight.bold,                color: Colors.purple,              )),          actions: [            IconButton(              onPressed: () => {_likeChange()},              icon: _heart,              tooltip: 'favorite-button',            ),          ],        ),        body: Center(            child: Text(          _selectRoute,          style: const TextStyle(            fontSize: 40,            fontWeight: FontWeight.bold,          ),        )),        floatingActionButton: FloatingActionButton(          onPressed: () {            _likeChange();          },          child: _heart,        ),        bottomNavigationBar: BottomNavigationBar(          items: const [            BottomNavigationBarItem(                icon: Icon(Icons.home, color: Colors.purple), label: 'Home'),            BottomNavigationBarItem(              icon: Icon(Icons.camera, color: Colors.purple),              label: 'Camera',            ),            BottomNavigationBarItem(                icon: Icon(Icons.store, color: Colors.purple), label: 'Store'),          ],          currentIndex: _selectElement,          onTap: _selectItem,        ),      );  _likeChange() {    setState(() {      if (_liked) {        _heart = const Icon(          Icons.favorite_border,          color: Colors.redAccent,        );        _liked = false;      } else {        _heart = const Icon(          Icons.favorite,          color: Colors.redAccent,        );        _liked = true;      }    });  }  _selectItem(int index) {    setState(() {      _selectElement = index;      switch (_selectElement) {        case 0:          _selectRoute = 'Home';          break;        case 1:          _selectRoute = 'Camera';          break;        case 2:          _selectRoute = 'Store';          break;      }    });  }}// Cupertino App Home pageclass MyHomePageCupertino extends StatefulWidget {  final String label;  const MyHomePageCupertino({super.key, required this.label});  @override  MyHomePageCupertinoState createState() => MyHomePageCupertinoState();}class MyHomePageCupertinoState extends State<MyHomePageCupertino> {  @override  Widget build(BuildContext context) => cupertino();  Widget cupertino() => const CupertinoPageScaffold(        navigationBar: CupertinoNavigationBar(          middle: Text('My Client CRUD'),        ),        child: Text('hello'),  );}
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:client/material/material_HomeScreen.dart'; // MaterialApp();
+import 'package:client/cupertino/cupertino_HomeScreen.dart'; // CupertinoApp()
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) =>
+      Platform.isIOS ? cupertinoRoot() : materialRoot();
+  Widget materialRoot() => MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.yellow,
+        ),
+        debugShowCheckedModeBanner: false,
+        title: 'Scaffold app',
+        home: const MyHomePageMaterial(
+          label: 'FastNotes',
+        ),
+      );
+  Widget cupertinoRoot() => const CupertinoApp(
+        debugShowCheckedModeBanner: false,
+        theme: CupertinoThemeData(brightness: Brightness.dark),
+        home: MyHomePageCupertino(
+          label: 'Scaffold Home',
+        ),
+      );
+}

@@ -149,7 +149,7 @@ lib/generated_plugin_registrant.dart
 **/ios/**/profile
 **/ios/**/xcuserdata
 **/ios/.generated/
-**/ios/Flutter/App.framework
+**/ios/Flutter/App.eframework
 **/ios/Flutter/Flutter.framework
 **/ios/Flutter/Flutter.podspec
 **/ios/Flutter/Generated.xcconfig
